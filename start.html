@@ -3,7 +3,7 @@
 <head>
 </head>
 <body>
-    <form id="submit_form" action="/confirmation" method="post">
+    <form id="submit_form" action="{{ url_for('confirmation') }}" method="post">
     <div>
         <p>Email</p>
         <input type="text" value="{{email}}" readonly>
