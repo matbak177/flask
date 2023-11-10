@@ -64,14 +64,13 @@ def proby(email):
 def confirmation():
     
     subordinate = request.form['subordinate']
-    employee = request.form.getlist('employee')
-    
     # subordinate = options_names.get(request.form['subordinate'], "Unknown")
-    # employee_values = request.form.getlist('employee')
-    # employee_names = [options_names.get(value, "Unknown") for value in employee_values]
+    
+    employee_values = request.form.getlist('employee')
+    employee_names = [options_names.get(value, "Unknown") for value in employee_values]
         
-    body = f'You want to exchange {subordinate} for {", ".join(employee)}'
-    # body = f'You want to exchange {subordinate} for {", ".join(employee_names)}'
+    # body = f'You want to exchange {subordinate} for {", ".join(employee)}'
+    body = f'You want to exchange {subordinate} for {", ".join(employee_names)}'
 
     return body
 
