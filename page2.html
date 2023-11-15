@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page 2</title>
+</head>
+<body>
+    <form action="/page3" method="post" onsubmit="return validateForm()">
+        <label for="subordinate">Subordinate:</label>
+        <select name="subordinate" required>
+            <option value="subordinate1">Subordinate 1</option>
+            <option value="subordinate2">Subordinate 2</option>
+            <option value="subordinate3">Subordinate 3</option>
+        </select>
+
+        <label for="employee">Employee:</label>
+        <input type="checkbox" name="employee" value="option1"> Option 1
+        <input type="checkbox" name="employee" value="option2"> Option 2
+        <!-- Add more options as needed -->
+
+        <input type="hidden" name="email" value="{{ email }}">
+        <input type="hidden" name="feedback_type" value="{{ feedback_type }}">
+
+        <button type="submit">Send</button>
+    </form>
+
+    <script>
+        function validateForm() {
+            var checkboxes = document.querySelectorAll('input[name="employee"]:checked');
+            if (checkboxes.length === 0) {
+                alert("Please select at least one employee option.");
+                return false; // Prevent form submission
+            }
+            return true; // Allow form submission
+        }
+    </script>
+</body>
+</html>
