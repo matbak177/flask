@@ -34,7 +34,6 @@ def page1(id):
     email = df[df['id'] == id]['email'].values[0] if id in df['id'].values else None
     return render_template('page1.html', id=id, email=email)
 
-
 @app.route('/page2', methods=['GET', 'POST'])
 def page2():
     if request.method == 'POST':
@@ -43,7 +42,6 @@ def page2():
         return render_template('page2.html',  email=email, feedback_type=feedback_type, subordinates=subordinates) # id=request.args.get('id'),
     return redirect(url_for('index'))
 
-    
 @app.route('/page3', methods=['GET', 'POST'])
 def page3():
     if request.method == 'POST':
