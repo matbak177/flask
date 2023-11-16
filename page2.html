@@ -8,7 +8,7 @@
 <body>
     <form action="/page3" method="post" onsubmit="return validateForm()">
         <label for="subordinate">Subordinate:</label>
-	<select name="subordinate" required>
+    	<select name="subordinate" required>
             {% for row in subordinates.values %}
                 {% if row[0] == email %}
                     <option value="{{ row[1] }}">{{ row[1] }}</option>
@@ -17,9 +17,11 @@
         </select>
 
         <label for="employee">Employee:</label>
-        <input type="checkbox" name="employee" value="option1"> Option 1
-        <input type="checkbox" name="employee" value="option2"> Option 2
-        <!-- Add more options as needed -->
+        <div>
+            {% for row in subordinates.values %}
+                <input type="checkbox" name="employee" value="{{ row[1] }}"> {{ row[1] }}<br>
+            {% endfor %}  
+        </div>
 
         <input type="hidden" name="email" value="{{ email }}">
         <input type="hidden" name="feedback_type" value="{{ feedback_type }}">
