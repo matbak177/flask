@@ -8,10 +8,12 @@
 <body>
     <form action="/page3" method="post" onsubmit="return validateForm()">
         <label for="subordinate">Subordinate:</label>
-        <select name="subordinate" required>
-            <option value="subordinate1">Subordinate 1</option>
-            <option value="subordinate2">Subordinate 2</option>
-            <option value="subordinate3">Subordinate 3</option>
+	<select name="subordinate" required>
+            {% for row in subordinates.values %}
+                {% if row[0] == email %}
+                    <option value="{{ row[1] }}">{{ row[1] }}</option>
+                {% endif %}
+            {% endfor %}
         </select>
 
         <label for="employee">Employee:</label>
