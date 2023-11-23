@@ -1,3 +1,7 @@
+{% include "base.html" %}
+
+{% block content %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +12,7 @@
 <body>
     <form action="/page2" method="post">
         <label for="email">Email:</label>
-        <input type="email" name="email" value="{{ email }}" required readonly>
+        <input type="email" name="email" value="{{ email }}" required disabled>
         
         <label for="feedback_type">Feedback type:</label>
         <select name="feedback_type" required>
@@ -20,3 +24,4 @@
     </form>
 </body>
 </html>
+{% endblock %}
