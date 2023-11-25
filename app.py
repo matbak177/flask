@@ -67,12 +67,24 @@ def ask_for_feedback():
         return render_template('page1.html', user_info=user_info, subordinates=subordinates)
     else:
         return redirect(url_for('index'))  
-
-@app.route('/ask_for_feedback_2')
+   
+@app.route('/ask_for_feedback_2', methods=['GET', 'POST'])
 def ask_for_feedback_2():
-    if request.method == 'POST':
-        return f'<h1>Tu będzie druga strona</h1>'
+    # Sprawdź, czy użytkownik jest zalogowany
+    current_user = session.get('current_user')
+    if current_user:
+        if request.method == 'POST':
+            subordinate = request.form.get('subordinate')
+            feedback_type = request.form.get('feedback_type')
+            
+            subordinate_cl = subordinates[subordinates['subordinate'] == subordinate]['cl'].values[0]
+
+            return render_template('page2.html', subordinates=subordinates, subordinate_cl=subordinate_cl, email=current_user, subordinate=subordinate, feedback_type=feedback_type)
+        
+        return redirect(url_for('index'))
     
+    return redirect(url_for('index'))
+
 @app.route('/history') 
 def history(): 
     return f'<h1>Tu bedzie historia</h1>'
@@ -80,3 +92,6 @@ def history():
 if __name__ == '__main__':
     app.secret_key = 'tutaj_wpisz'
     app.run()
+    
+
+
