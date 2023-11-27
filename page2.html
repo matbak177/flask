@@ -12,15 +12,23 @@
 <body>
     <form action="/confirmation" method="post" onsubmit="return validateForm()">
         <label for="content">Treść:</label>
+        <br>
         <textarea name="content" rows="4" cols="50" required></textarea>
+        <br>
+        <!-- Dodaj pole wyszukiwania -->
+        <label for="employee_search">Wyszukiwarka:</label>
+        <input type="text" id="employee_search" oninput="filterOptions()" />
         
-        <label for="employees">Kogo prosisz o feedback?</label>
-        <div>
+        <br>
+        <label for="employees"></label>
+        <div id="employees">
             {% for row in subordinates.values %}
                 {% if feedback_type == "promoted" and row[2] > subordinate_cl %}
-                    <input type="checkbox" name="employees" value="{{ row[1] }}"> {{ row[1] }}<br>
+                    <input type="checkbox" name="employees" value="{{ row[1] }}" id="{{ row[1] }}"> 
+                    <label for="{{ row[1] }}">{{ row[1] }}</label><br>
                 {% elif feedback_type == "regular" and row[1] != subordinate %}
-                    <input type="checkbox" name="employees" value="{{ row[1] }}"> {{ row[1] }}<br>
+                    <input type="checkbox" name="employees" value="{{ row[1] }}" id="{{ row[1] }}"> 
+                    <label for="{{ row[1] }}">{{ row[1] }}</label><br>
                 {% endif %}
             {% endfor %}  
         </div>
@@ -40,6 +48,39 @@
                 return false; // Prevent form submission
             }
             return true; // Allow form submission
+        }
+        
+         function filterOptions() {
+            let input, filter, checkboxes, labels, txtValue;
+            input = document.getElementById('employee_search');
+            filter = input.value.toLowerCase();
+            checkboxes = document.querySelectorAll('#employees input[type="checkbox"]');
+            labels = document.querySelectorAll('#employees label');
+
+            for (let i = 0; i < checkboxes.length; i++) {
+                txtValue = labels[i].textContent || labels[i].innerText;
+                if (txtValue.toLowerCase().indexOf(filter) > -1) {
+                    checkboxes[i].style.display = 'block';
+                    labels[i].style.display = 'block';
+                } else {
+                    checkboxes[i].style.display = 'none';
+                    labels[i].style.display = 'none';
+                }
+            }
+        }
+        function filterOptions2() {
+            let input, filter, checkboxes, labels, txtValue;
+            input = document.getElementById('employee_search');
+            filter = input.value.toLowerCase();
+            checkboxes = document.querySelectorAll('#employees input[type="checkbox"]');
+            labels = document.querySelectorAll('#employees label');
+   
+            for (let i = 0; i < checkboxes.length; i++) {
+                txtValue = labels[i].textContent || labels[i].innerText;
+                let shouldDisplay = txtValue.toLowerCase().includes(filter);
+                checkboxes[i].style.display = shouldDisplay ? 'block' : 'none';
+                labels[i].style.display = shouldDisplay ? 'block' : 'none';
+            }
         }
     </script>
 </body>
