@@ -1,0 +1,41 @@
+{% include "menu.html" %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page 2</title>
+</head>
+<body>
+    <form action="/update" method="post" onsubmit="return validateForm()">
+        <label for="employees">Kogo chcesz doprosisz o feedback?</label>
+        <div>
+            {% for row in subordinates.values %}
+                {% if row[1] in employee %}
+                    <input type="checkbox" name="employees" value="{{ row[1] }}" checked readonly> {{ row[1] }}<br>
+                {% elif row[1] not in employee %}
+                    {% if ask[0][4] == "promoted" and row[2] > subordinate_cl %}
+                        <input type="checkbox" name="employees" value="{{ row[1] }}"> {{ row[1] }}<br>
+                    {% elif ask[0][4] == "regular" and row[1] != ask[0][3] %}
+                        <input type="checkbox" name="employees" value="{{ row[1] }}"> {{ row[1] }}<br>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}  
+        </div>
+        
+        <input type="hidden" name="id" value="{{ ask[0][0] }}">
+        <input type="hidden" name="subordinate" value="{{ ask[0][3] }}">
+        <input type="hidden" name="feedback_type" value="{{ ask[0][4] }}">
+        
+        <button type="submit">Send</button>
+    </form>
+    
+    
+    
+</body>
+</html>
+
+{% endblock %}

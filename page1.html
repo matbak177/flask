@@ -1,0 +1,36 @@
+{% include "menu.html" %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ask for Feedback</title>
+</head>
+<body>
+    <form action="/ask_for_feedback_2" method="post">
+        <label for="subordinate">Subordinate:</label>
+        <select name="subordinate" required>
+            {% for row in subordinates.values %}
+                {% if row[0] == user_info["email"] %}
+                    <option value="{{ row[1] }}">{{ row[1] }}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
+
+        <label for="feedback_type">Feedback type:</label>
+        <select name="feedback_type" required>
+            <option value="regular">Regular</option>
+            <option value="promoted">Promoted</option>
+        </select>
+
+        <input type="hidden" name="email" value="{{ user_info['email'] }}">
+
+        <button type="submit">Next</button>
+    </form>
+</body>
+</html>
+
+{% endblock %}

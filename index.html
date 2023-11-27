@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Formularz z filtrowaniem</title>
+    <style>
+        .card {
+            width: 50%;
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #f9f9f9;
+        }
+
+        .card-header {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .form-content {
+            display: flex;
+            flex-direction: column;
+            gap: 1px;
+        }
+
+        .form-content label {
+            font-weight: bold;
+        }
+
+        .form-content input[type="email"],
+        .form-content input[type="radio"],
+        .form-content input[type="checkbox"],
+        .form-content input[type="submit"] {
+            margin-top: 1px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <div class="card-header">Formularz z filtrowaniem</div>
+    <form action="/submit_form" method="post" class="form-content">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" value="{email}" readonly>
+
+        <label>Subordinate:</label>
+        <input type="radio" id="subordinate_option1" name="subordinate" value="option1">
+        <label for="subordinate_option1">Opcja 1</label>
+        <input type="radio" id="subordinate_option2" name="subordinate" value="option2">
+        <label for="subordinate_option2">Opcja 2</label>
+        <input type="radio" id="subordinate_option3" name="subordinate" value="option3">
+        <label for="subordinate_option3">Opcja 3</label>
+
+        <label for="employee_search">Employee (Wyszukiwarka):</label>
+        <input type="text" id="employee_search" oninput="filterOptions()" placeholder="Wyszukaj...">
+
+        <label for="employee_options">Employee:</label>
+        <div id="employee_options">
+            <input type="checkbox" id="employee_option1" name="employee[]" value="option1">
+            <label for="employee_option1">Opcja 1</label>
+            <input type="checkbox" id="employee_option2" name="employee[]" value="option2">
+            <label for="employee_option2">Opcja 2</label>
+            <input type="checkbox" id="employee_option3" name="employee[]" value="option3">
+            <label for="employee_option3">Opcja 3</label>
+            <input type="checkbox" id="employee_option4" name="employee[]" value="option4">
+            <label for="employee_option4">Opcja 4</label>
+            <input type="checkbox" id="employee_option5" name="employee[]" value="option5">
+            <label for="employee_option5">Opcja 5</label>
+            <input type="checkbox" id="employee_option6" name="employee[]" value="option6">
+            <label for="employee_option6">Opcja 6</label>
+            <input type="checkbox" id="employee_option7" name="employee[]" value="option7">
+            <label for="employee_option7">Opcja 7</label>
+	    <input type="checkbox" id="employee_option8" name="employee[]" value="option8">
+            <label for="employee_option1">Opcja 8</label>
+            <input type="checkbox" id="employee_option9" name="employee[]" value="option9">
+            <label for="employee_option2">Opcja 9</label>
+            <input type="checkbox" id="employee_option10" name="employee[]" value="option10">
+            <label for="employee_option3">Opcja 10</label>
+            <input type="checkbox" id="employee_option11" name="employee[]" value="option11">
+            <label for="employee_option4">Opcja 11</label>
+            <input type="checkbox" id="employee_option5" name="employee[]" value="option12">
+            <label for="employee_option5">Opcja 12</label>
+            <input type="checkbox" id="employee_option6" name="employee[]" value="option13">
+            <label for="employee_option6">Opcja 13</label>
+            <input type="checkbox" id="employee_option14" name="employee[]" value="option14">
+            <label for="employee_option7">Opcja 14</label>
+        </div>
+
+        <input type="submit" value="Wyślij">
+    </form>
+</div>
+
+<script>
+    function filterOptions() {
+        let input, filter, checkboxes, labels, txtValue;
+        input = document.getElementById('employee_search');
+        filter = input.value.toLowerCase();
+        checkboxes = document.querySelectorAll('#employee_options input[type="checkbox"]');
+        labels = document.querySelectorAll('#employee_options label');
+
+        for (let i = 0; i < checkboxes.length; i++) {
+            txtValue = labels[i].textContent || labels[i].innerText;
+            if (txtValue.toLowerCase().indexOf(filter) > -1) {
+                checkboxes[i].style.display = 'block';
+                labels[i].style.display = 'block';
+            } else {
+                checkboxes[i].style.display = 'none';
+                labels[i].style.display = 'none';
+            }
+        }
+    }
+</script>
+
+</body>
+</html>

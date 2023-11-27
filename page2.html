@@ -1,0 +1,48 @@
+{% include "menu.html" %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page 2</title>
+</head>
+<body>
+    <form action="/confirmation" method="post" onsubmit="return validateForm()">
+        <label for="content">Treść:</label>
+        <textarea name="content" rows="4" cols="50" required></textarea>
+        
+        <label for="employees">Kogo prosisz o feedback?</label>
+        <div>
+            {% for row in subordinates.values %}
+                {% if feedback_type == "promoted" and row[2] > subordinate_cl %}
+                    <input type="checkbox" name="employees" value="{{ row[1] }}"> {{ row[1] }}<br>
+                {% elif feedback_type == "regular" and row[1] != subordinate %}
+                    <input type="checkbox" name="employees" value="{{ row[1] }}"> {{ row[1] }}<br>
+                {% endif %}
+            {% endfor %}  
+        </div>
+
+        <input type="hidden" name="email" value="{{ email }}">
+        <input type="hidden" name="feedback_type" value="{{ feedback_type }}">
+        <input type="hidden" name="subordinate" value="{{ subordinate }}">
+
+        <button type="submit">Send</button>
+    </form>
+
+    <script>
+        function validateForm() {
+            var checkboxes = document.querySelectorAll('input[name="employees"]:checked');
+            if (checkboxes.length === 0) {
+                alert("Please select at least one employee option.");
+                return false; // Prevent form submission
+            }
+            return true; // Allow form submission
+        }
+    </script>
+</body>
+</html>
+
+{% endblock %}

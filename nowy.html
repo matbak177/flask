@@ -1,0 +1,51 @@
+{% include "base.html" %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Formularz</title>
+</head>
+<body>
+<form action="/submit_form" method="post">
+    <div>
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email">
+    </div>
+
+    <div>
+        <p>Subordinate:</p>
+        <input type="radio" id="subordinate_option1" name="subordinate" value="option1">
+        <label for="subordinate_option1">Opcja 1</label><br>
+        <input type="radio" id="subordinate_option2" name="subordinate" value="option2">
+        <label for="subordinate_option2">Opcja 2</label><br>
+        <input type="radio" id="subordinate_option3" name="subordinate" value="option3">
+        <label for="subordinate_option3">Opcja 3</label><br>
+    </div>
+
+    <div>
+        <p>Employee:</p>
+        <input type="checkbox" id="employee_option1" name="employee[]" value="option1">
+        <label for="employee_option1">Opcja 1</label><br>
+        <input type="checkbox" id="employee_option2" name="employee[]" value="option2">
+        <label for="employee_option2">Opcja 2</label><br>
+        <input type="checkbox" id="employee_option3" name="employee[]" value="option3">
+        <label for="employee_option3">Opcja 3</label><br>
+        <input type="checkbox" id="employee_option4" name="employee[]" value="option4">
+        <label for="employee_option4">Opcja 4</label><br>
+        <input type="checkbox" id="employee_option5" name="employee[]" value="option5">
+        <label for="employee_option5">Opcja 5</label><br>
+        <input type="checkbox" id="employee_option6" name="employee[]" value="option6">
+        <label for="employee_option6">Opcja 6</label><br>
+        <input type="checkbox" id="employee_option7" name="employee[]" value="option7">
+        <label for="employee_option7">Opcja 7</label><br>
+    </div>
+
+    <input type="submit" value="Wyślij">
+</form>
+
+</body>
+</html>
+
+{% endblock %}

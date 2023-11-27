@@ -1,0 +1,33 @@
+{% include "menu.html" %}
+
+{% block content %}
+<div class ="container">
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Timestamp</th>
+                <th scope="col">Subordinate</th>
+                <th scope="col">Feedback Type</th>
+                <th scope="col">Employees</th>
+                <th scope="col">Message</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for feedback in results %}
+                <tr>
+                    <th scope="row">{{ feedback.timestamp }}</th>
+                    <td>{{ feedback.subordinate }}</td>
+                    <td>{{ feedback.feedback_type }}</td>
+                    <td>{{ feedback.employees }}</td>
+                    <td>{{ feedback.message }}</td>
+                    <td>
+                        <!--<a href="#" class="btn btn-success btn-sm" role="button">Edit...</a> -->
+                        <a href="{{ url_for('edit', id=feedback['id']) }}" class="btn btn-success btn-sm" role="button">Edit</a>
+                    </td>
+                </tr>
+            {%endfor%} 
+        </tbody>
+    </table>
+</div>
+{% endblock %}
