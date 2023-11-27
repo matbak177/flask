@@ -82,6 +82,29 @@
                 labels[i].style.display = shouldDisplay ? 'block' : 'none';
             }
         }
+
+        function filterOptions3() {
+                let input, filter, checkboxes, labels, txtValue;
+                input = document.getElementById('employee_search');
+                filter = input.value.toLowerCase();
+                checkboxes = document.querySelectorAll('#employees input[type="checkbox"]');
+                labels = document.querySelectorAll('#employees label');
+        
+                for (let i = 0; i < checkboxes.length; i++) {
+                    txtValue = labels[i].textContent || labels[i].innerText;
+                    let shouldDisplay = txtValue.toLowerCase().includes(filter);
+                    checkboxes[i].style.display = shouldDisplay ? 'inline-block' : 'none';
+                    labels[i].style.display = shouldDisplay ? 'inline-block' : 'none';
+                }
+        
+                // Przywróć domyślne style, gdy filtr jest pusty
+                if (filter === '') {
+                    for (let i = 0; i < checkboxes.length; i++) {
+                        checkboxes[i].style.display = 'inline-block';
+                        labels[i].style.display = 'inline-block';
+                    }
+                }
+            }
     </script>
 </body>
 </html>
